@@ -2,6 +2,7 @@ package com.pet.supplies.admin.rest.controllers;
 
 import java.util.Set;
 
+import com.pet.supplies.admin.service.CategoryMgtService;
 import com.pet.supplies.admin.service.ProductMgtService;
 import com.pet.supplies.common.model.AdminOrSellerModel;
 import com.pet.supplies.common.model.CategoryModel;
@@ -35,60 +36,60 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/product")
+@RequestMapping("/category")
 @CrossOrigin(origins = "http://localhost:9000")
-public class ProductMgtController
+public class CategoryMgtController
 {
-   Logger logger = Logger.getLogger(ProductMgtController.class);
+   Logger logger = Logger.getLogger(CategoryMgtController.class);
    
    @Setter
    @Autowired
-   private ProductMgtService prodcutMgtService;
+   private CategoryMgtService categoryMgtService;
 
    @RequestMapping(value = "/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-   public ResponseEntity<ProductModel> saveProduct(@RequestBody ProductModel model)
+   public ResponseEntity<CategoryModel> saveCategory(@RequestBody CategoryModel model)
    {
-      logger.info("ProductMgtController.saveProduct called");
+      logger.info("CategoryMgtController.saveCategory called");
       if (model == null)
       {
-         return new ResponseEntity<ProductModel>(HttpStatus.NOT_FOUND);
+         return new ResponseEntity<CategoryModel>(HttpStatus.NOT_FOUND);
       }
-      ProductModel productModel = prodcutMgtService.saveProduct(model);
+      CategoryModel categoryModel = categoryMgtService.saveCategory(model);
 
-      return new ResponseEntity<ProductModel>(productModel, HttpStatus.OK);
+      return new ResponseEntity<CategoryModel>(categoryModel, HttpStatus.OK);
    }
    
    @RequestMapping(value = "/load/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-   public ResponseEntity<Set<ProductModel>> loadProductsByAdmOrSellerId(@PathVariable Long id)
+   public ResponseEntity<List<CategoryModel>> loadCategoryByAdmOrSellerId(@PathVariable Long id)
    {
-      logger.info("ProductMgtController.loadProductsByAdmOrSellerId called");
+      logger.info("CategoryMgtController.loadCategoryByAdmOrSellerId called");
       if (id == null)
       {
-         return new ResponseEntity<Set<ProductModel>>(HttpStatus.NOT_FOUND);
+         return new ResponseEntity<List<CategoryModel>>(HttpStatus.NOT_FOUND);
       }
-      Set<ProductModel> productModels = prodcutMgtService.findProductsByAdmOrSellerId(id);
+      List<CategoryModel> categoryModels = categoryMgtService.findCategoriesByAdmOrSellerId(id);
 
-      return new ResponseEntity<Set<ProductModel>>(productModels, HttpStatus.OK);
+      return new ResponseEntity<List<CategoryModel>>(categoryModels, HttpStatus.OK);
    }
    
    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-   public ResponseEntity<String> deleteProduct(@RequestBody ProductModel model)
+   public ResponseEntity<String> deleteCategory(@RequestBody CategoryModel model)
    {
-      logger.info("ProductMgtController.deleteProduct called");
-      prodcutMgtService.deleteProduct(model);
+      logger.info("CategoryMgtController.deleteCategory called");
+      categoryMgtService.deleteCategory(model);
       return new ResponseEntity<String>(HttpStatus.OK);
    }
    
    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-   public ResponseEntity<ProductModel> updateProduct(@RequestBody ProductModel model)
+   public ResponseEntity<CategoryModel> updateCategory(@RequestBody CategoryModel model)
    {
-      logger.info("ProductMgtController.ProductModel called");
+      logger.info("CategoryMgtController.updateCategory called");
       if (model == null)
       {
-         return new ResponseEntity<ProductModel>(HttpStatus.NOT_FOUND);
+         return new ResponseEntity<CategoryModel>(HttpStatus.NOT_FOUND);
       }
-      ProductModel productModel = prodcutMgtService.updateProduct(model);
+      CategoryModel categoryModel = categoryMgtService.updateCategory(model);
 
-      return new ResponseEntity<ProductModel>(productModel, HttpStatus.OK);
+      return new ResponseEntity<CategoryModel>(categoryModel, HttpStatus.OK);
    }
 }

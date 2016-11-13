@@ -12,4 +12,6 @@ public interface ProductMgtService
 
    void deleteProduct(ProductModel model);
 
+   ProductModel updateProduct(ProductModel model);
+
 }

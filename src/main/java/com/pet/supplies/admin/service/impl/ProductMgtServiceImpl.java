@@ -113,5 +113,11 @@ public class ProductMgtServiceImpl implements ProductMgtService
          new FunctionalRunTimeException(ErrorMessages.PRODUCT_DELETE);
       }
    }
+	
+	@Override
+	public ProductModel updateProduct(ProductModel model) {
+		//TODO Refactored
+		return saveProduct(model);
+	}
 
 }
