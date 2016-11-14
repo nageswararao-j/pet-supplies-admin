@@ -119,6 +119,7 @@ CREATE TABLE `pet_supplies`.`payment` (
 PRIMARY KEY (`PAY_ID`)
 );
 
+
 INSERT INTO `pet_supplies`.`category` (`CAT_ID`, `NAME`, `CODE`) VALUES ('100', 'Cats', 'CAT');
 
 INSERT INTO `pet_supplies`.`product` (`product_id`, `name`, `description`, `price`, `currency`, `status`, `quantity`, `cat_id`) VALUES ('1000', 'BENGAL', 'Bengal cat', '2500', 'EUR', '1', '1', '100');
@@ -176,8 +177,3 @@ INSERT INTO `pet_supplies`.`image` (`IMG_ID`, `NAME`, `URL`, `product_id`) VALUE
 INSERT INTO `pet_supplies`.`product` (`product_id`, `name`, `description`, `price`, `currency`, `status`, `quantity`, `cat_id`) VALUES ('2008', 'Choostix Dog Rope', 'Choostix Dog Rope Chain Synthetic Yarn, Medium', '500', 'EUR', '1', '1', '101');
 INSERT INTO `pet_supplies`.`image` (`IMG_ID`, `NAME`, `URL`, `product_id`) VALUES ('17', 'Dogs', '/images/ChoostixDogRope.jpg', '2008');
 
-
-INSERT INTO `pet_supplies`.`user` (`USER_ID`, `PHONE`, `EMAIL_ID`, `NAME`) VALUES ('1000', '9886162877', 'nageswararao.janjyala@capgemini.com', 'Nageswararao');
-
-INSERT INTO `pet_supplies`.`category` (`CAT_ID`, `NAME`, `CODE`) VALUES ('102', 'Birds', 'BIRDS');
-INSERT INTO `pet_supplies`.`category` (`CAT_ID`, `NAME`, `CODE`) VALUES ('104', 'Birds', 'BIRDS');

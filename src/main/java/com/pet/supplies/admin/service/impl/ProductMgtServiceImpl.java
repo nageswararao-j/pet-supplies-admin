@@ -1,6 +1,5 @@
 package com.pet.supplies.admin.service.impl;
 
-
 import com.pet.supplies.exception.FunctionalRunTimeException;
 
 import com.pet.supplies.common.constants.ErrorMessages;
@@ -31,7 +30,7 @@ public class ProductMgtServiceImpl implements ProductMgtService
    @Setter
    @Autowired
    private ProductRepository productRepository;
-   
+
    @Setter
    @Autowired
    private CategoryRepository categoryRepository;
@@ -59,7 +58,7 @@ public class ProductMgtServiceImpl implements ProductMgtService
          product.setSeller(admOrSeller);
          product.setImageUrls(newImages);
          newProduct = productRepository.save(product);
-         Set<Image> images = ModelToEntityMapper.mapImageModelsToImageEntities(model.getImageUrls(),newProduct);
+         Set<Image> images = ModelToEntityMapper.mapImageModelsToImageEntities(model.getImageUrls(), newProduct);
          if (CollectionUtils.isNotEmpty(images))
          {
             images.forEach(image -> {
@@ -90,34 +89,40 @@ public class ProductMgtServiceImpl implements ProductMgtService
       Set<ProductModel> productModels = EntityToModelMapper.mapProductEntityToProductModel(products);
       return productModels;
    }
-   
+
    @Override
    public void deleteProduct(ProductModel model)
    {
-      try{
-         if(model != null){
+      try
+      {
+         if (model != null)
+         {
             Product product = ModelToEntityMapper.mapProductModelToProductEntity(model);
             Category category = categoryRepository.findOneByCode(model.getCategoryCode());
             AdminOrSeller seller = adminOrSellerRepository.findOne(model.getSellerId());
             product.setId(model.getProductId());
             product.setCategory(category);
             product.setSeller(seller);
-            if(CollectionUtils.isNotEmpty(product.getImageUrls())){
-               product.getImageUrls().forEach(image->{
+            if (CollectionUtils.isNotEmpty(product.getImageUrls()))
+            {
+               product.getImageUrls().forEach(image -> {
                   imageRepository.delete(image);
                });
             }
             productRepository.delete(product);
          }
-      }catch(Exception exception){
+      }
+      catch (Exception exception)
+      {
          new FunctionalRunTimeException(ErrorMessages.PRODUCT_DELETE);
       }
    }
-	
-	@Override
-	public ProductModel updateProduct(ProductModel model) {
-		//TODO Refactored
-		return saveProduct(model);
-	}
+
+   @Override
+   public ProductModel updateProduct(ProductModel model)
+   {
+      //TODO Refactored
+      return saveProduct(model);
+   }
 
 }

@@ -2,8 +2,6 @@ package com.pet.supplies.admin.rest.controllers;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
-import org.springframework.web.bind.annotation.ResponseBody;
-import java.util.ArrayList;
 import com.pet.supplies.common.model.OrdersModel;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -27,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderMgtController
 {
    Logger logger = Logger.getLogger(OrderMgtController.class);
-   
+
    @Setter
    @Autowired
    private OrderMgtService orderMgtService;
@@ -44,7 +42,7 @@ public class OrderMgtController
 
       return new ResponseEntity<List<OrdersModel>>(orders, HttpStatus.OK);
    }
-   
+
    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<OrdersModel> updateOrder(@RequestBody OrdersModel model)
    {

@@ -15,9 +15,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface CategoryRepository extends CrudRepository<Category, Long>
 {
 
-   @SuppressWarnings("unchecked")
-   Category save(Category category);
-
    @Query("from Category cat where cat.code=:code")
    Category findOneByCode(@Param("code") String code);
 

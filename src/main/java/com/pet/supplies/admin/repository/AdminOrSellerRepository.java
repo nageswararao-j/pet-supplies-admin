@@ -13,6 +13,4 @@ public interface AdminOrSellerRepository extends CrudRepository<AdminOrSeller, L
    @Query("from AdminOrSeller adminOrSeller where adminOrSeller.id=:id")
    public AdminOrSeller findOne(@Param("id") Long id);
 
-   @SuppressWarnings("unchecked")
-   public AdminOrSeller save(AdminOrSeller user);
 }

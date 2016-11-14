@@ -37,7 +37,7 @@ public class Application extends SpringBootServletInitializer
    {
       return application.sources(Application.class);
    }
-   
+
    @Bean
    public WebMvcConfigurer corsConfigurer()
    {

@@ -16,56 +16,66 @@ import org.springframework.stereotype.Service;
 import com.pet.supplies.admin.repository.UserRepository;
 import com.pet.supplies.admin.service.UserService;
 import com.pet.supplies.common.constants.ErrorMessages;
-import com.pet.supplies.common.domain.Image;
 import com.pet.supplies.common.domain.User;
 import com.pet.supplies.common.mapper.EntityToModelMapper;
-import com.pet.supplies.common.mapper.ModelToEntityMapper;
 import com.pet.supplies.common.model.UserModel;
 import com.pet.supplies.exception.FunctionalRunTimeException;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService
+{
 
-	@Setter
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Override
-	public Set<UserModel> findUsers() {
-		List<User>  users = null;
-		if(userRepository.findAll() != null){
-			users = StreamSupport.stream(userRepository.findAll().spliterator(), false)
-	                 .collect(Collectors.toList());
-		}
-		Set<UserModel> userModels = EntityToModelMapper.mapUsersEntityToUsersModel(users);
-		return new HashSet<UserModel>(userModels);
-	}
+   @Setter
+   @Autowired
+   private UserRepository userRepository;
 
-	@Override
-	public void deleteUser(UserModel model) {
-		try {
-			if (model != null) {
-				userRepository.delete(model.getUserId());
-			}
-		} catch (Exception ex) {
-			new FunctionalRunTimeException(ErrorMessages.USER_DELETE);
-		}
-	}
+   @Override
+   public Set<UserModel> findUsers()
+   {
+      List<User> users = null;
+      if (userRepository.findAll() != null)
+      {
+         users = StreamSupport.stream(userRepository.findAll().spliterator(), false).collect(Collectors.toList());
+      }
+      Set<UserModel> userModels = EntityToModelMapper.mapUsersEntityToUsersModel(users);
+      return new HashSet<UserModel>(userModels);
+   }
 
-	@Override
-	public UserModel updateUser(UserModel model) {
-		try {
-			if (model != null) {
-				User existingUser = userRepository.findOne(model.getUserId());
-				existingUser.setName(model.getName());
-				User updatedUser = userRepository.save(existingUser);
-				model = EntityToModelMapper.mapUserEntityToUserModel(updatedUser);
-			}
-		} catch (Exception ex) {
-			new FunctionalRunTimeException(ErrorMessages.USER_UPDATE);
-		}
-		return model;
-	}
+   @Override
+   public void deleteUser(UserModel model)
+   {
+      try
+      {
+         if (model != null)
+         {
+            userRepository.delete(model.getUserId());
+         }
+      }
+      catch (Exception ex)
+      {
+         new FunctionalRunTimeException(ErrorMessages.USER_DELETE);
+      }
+   }
+
+   @Override
+   public UserModel updateUser(UserModel model)
+   {
+      try
+      {
+         if (model != null)
+         {
+            User existingUser = userRepository.findOne(model.getUserId());
+            existingUser.setName(model.getName());
+            User updatedUser = userRepository.save(existingUser);
+            model = EntityToModelMapper.mapUserEntityToUserModel(updatedUser);
+         }
+      }
+      catch (Exception ex)
+      {
+         new FunctionalRunTimeException(ErrorMessages.USER_UPDATE);
+      }
+      return model;
+   }
 
 }

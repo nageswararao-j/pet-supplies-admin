@@ -1,13 +1,11 @@
 package com.pet.supplies.admin.rest.controllers;
 
-
 import com.pet.supplies.common.model.AdminOrSellerModel;
 
 import com.pet.supplies.admin.service.AdminOrSellerLoginService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.log4j.Logger;
-import com.pet.supplies.common.model.AuthenticateUserModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +15,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 /**
+ * ???? TODO Similar to User login, Should be refactor later and move to common module
  * 
- * ????
- * TODO Similar to User login, Should be refactor later and move to common module
  * @version $Id:$
  * @author njanjyal //I have removed copyrights
  */
@@ -31,21 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminOrSellerLoginController
 {
    Logger logger = Logger.getLogger(AdminOrSellerLoginController.class);
-   
+
    @Setter
    @Autowired
    private AdminOrSellerLoginService loginService;
-   
-   @RequestMapping(value = "/login/success")
-   public String landing()
-   {
-      return "/index.html";
 
-   }
-   
    /**
-    * 
-    * 
     * @param model
     * @return
     */

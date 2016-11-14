@@ -1,19 +1,9 @@
 package com.pet.supplies.admin.rest.controllers;
 
-import java.util.Set;
-
 import com.pet.supplies.admin.service.CategoryMgtService;
-import com.pet.supplies.admin.service.ProductMgtService;
-import com.pet.supplies.common.model.AdminOrSellerModel;
 import com.pet.supplies.common.model.CategoryModel;
 
 import org.springframework.web.bind.annotation.RequestBody;
-
-import com.pet.supplies.common.model.ProductModel;
-
-import java.util.ArrayList;
-
-import com.pet.supplies.common.model.OrdersModel;
 
 import java.util.List;
 
@@ -22,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.pet.supplies.admin.service.OrderMgtService;
 
 import lombok.Setter;
 
@@ -37,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/category")
-@CrossOrigin(origins = "http://localhost:9000")
+@CrossOrigin(origins = "${app.allow.origin}")
 public class CategoryMgtController
 {
    Logger logger = Logger.getLogger(CategoryMgtController.class);
-   
+
    @Setter
    @Autowired
    private CategoryMgtService categoryMgtService;
@@ -58,7 +46,7 @@ public class CategoryMgtController
 
       return new ResponseEntity<CategoryModel>(categoryModel, HttpStatus.OK);
    }
-   
+
    @RequestMapping(value = "/load/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<List<CategoryModel>> loadCategoryByAdmOrSellerId(@PathVariable Long id)
    {
@@ -71,7 +59,7 @@ public class CategoryMgtController
 
       return new ResponseEntity<List<CategoryModel>>(categoryModels, HttpStatus.OK);
    }
-   
+
    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<String> deleteCategory(@RequestBody CategoryModel model)
    {
@@ -79,7 +67,7 @@ public class CategoryMgtController
       categoryMgtService.deleteCategory(model);
       return new ResponseEntity<String>(HttpStatus.OK);
    }
-   
+
    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<CategoryModel> updateCategory(@RequestBody CategoryModel model)
    {

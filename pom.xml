@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pet.supplies</groupId>
 	<artifactId>pet-supplies-admin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>RELEASE-1.0</version>
 	<packaging>war</packaging>
 
 	<name>pet-supplies-admin</name>
@@ -23,8 +23,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.pet.supplies</groupId>
+			<artifactId>pet-supplies-admin-client</artifactId>
+			<version>RELEASE-1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pet.supplies</groupId>
 			<artifactId>pet-supplies-commons</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>RELEASE-1.0</version>
 		</dependency>
 		<!-- Spring Boot -->
 		<dependency>

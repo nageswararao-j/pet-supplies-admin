@@ -2,7 +2,6 @@ package com.pet.supplies.admin.repository;
 
 import com.pet.supplies.common.domain.AdminOrSeller;
 
-import com.pet.supplies.common.domain.AuthenticateUser;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,11 +13,8 @@ public interface AdminOrSellerLoginRepository extends CrudRepository<AdminOrSell
 
    @Query("from AdminOrSeller admOrSeller where admOrSeller.emailId=:emailId and admOrSeller.password=:password")
    public AdminOrSeller authenticateAdminOrSeller(@Param("emailId") String emailId, @Param("password") String password);
-   
+
    @Query("select admOrSeller.emailId from AdminOrSeller admOrSeller where admOrSeller.emailId=:emailId")
    public String isEmailRegistered(@Param("emailId") String emailId);
-
-   @SuppressWarnings("unchecked")
-   public AdminOrSeller save(AdminOrSeller admOrSeller);
 
 }
